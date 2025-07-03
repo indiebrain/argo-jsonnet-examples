@@ -3,7 +3,7 @@ local kube = import 'vendor/kube-libsonnet/kube.libsonnet';
 local stack = {
   ui_deployment: kube.Deployment("gustbook-ui") {
     spec+: {
-      replicas: 3,
+      replicas: 1,
       template+: {
         spec+: {
           containers_+: {
