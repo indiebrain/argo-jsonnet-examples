@@ -24,6 +24,7 @@ local accessories = {
       replicas: 1,
       template+: {
         spec+: {
+          serviceAccountName: 'redis-operator',
           restartPolicy: 'Always',
           containers_+: {
             ui_container: kube.Container(names.redis_operator) {
