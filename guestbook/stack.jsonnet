@@ -72,7 +72,7 @@ local accessories = {
       networkPolicyNsList: [
         {
           matchLabelKey: 'app.kubernetes.io/name',
-          matchLabelValue: 'redis-test',
+          matchLabelValue: 'guestbook-libsonnet',
         },
       ],
       redis: {
