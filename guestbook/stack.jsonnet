@@ -30,8 +30,7 @@ local accessories = {
             ui_container: kube.Container(names.redis_operator) {
               image: 'powerhome/redis-operator:v4.3.0',
               env_+: {
-                name: 'WATCH_NAMESPACE',
-                valueFrom: {
+                'WATCH_NAMESPACE': {
                   fieldRef: {
                     fieldPath: 'metadata.namespace',
                   },
