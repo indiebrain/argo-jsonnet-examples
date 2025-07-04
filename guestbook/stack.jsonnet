@@ -23,7 +23,7 @@ local stack = {
       template+: {
         spec+: {
           containers_+: {
-            ui_container: kube.Container(names.ui) {
+            ui_container: kube.Container(names.redis_operator) {
               image: 'powerhome/redis-operator:v4.3.0',
               env_+: {
                 name: 'WATCH_NAMESPACE',
