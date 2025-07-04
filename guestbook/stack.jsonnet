@@ -22,6 +22,7 @@ local stack = {
       replicas: 1,
       template+: {
         spec+: {
+          restartPolicy: "Always",
           containers_+: {
             ui_container: kube.Container(names.redis_operator) {
               image: 'powerhome/redis-operator:v4.3.0',
@@ -45,7 +46,6 @@ local stack = {
               ports_+: {
                 metrics: { containerPort: 9710 },
               },
-              restartPolicy: "Always",
             },
           },
         },
