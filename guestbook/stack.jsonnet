@@ -117,12 +117,12 @@ local accessories = {
           enabled: true,
           image: 'docker.io/leominov/redis_sentinel_exporter:1.7.1',
         },
-        haproxy: {
-          replicas: 2,
-          resources: {
-            requests: { cpu: '100m', memory: '100Mi' },
-            limits: { memory: '500Mi' },
-          },
+      },
+      haproxy: {
+        replicas: 2,
+        resources: {
+          requests: { cpu: '100m', memory: '100Mi' },
+          limits: { memory: '500Mi' },
         },
       },
     },
