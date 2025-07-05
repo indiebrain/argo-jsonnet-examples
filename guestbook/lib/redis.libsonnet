@@ -1,9 +1,5 @@
 local kube = import '../vendor/kube-libsonnet/kube.libsonnet';
 
-local names = {
-  operator: 'redis-operator',
-};
-
 local defaults = {
   operator: {
     name: 'redis-operator',
@@ -15,11 +11,13 @@ local defaults = {
 };
 
 local Operator(args) =
-  kube.Deployment(names.operator) {
+  local name = std.get(args, 'name', defaults.operator.name);
+  local sync_wave = std.get(args, 'sync_wave');
+  kube.Deployment(name) {
     metadata+: {
       annotations+: {
         'argocd.argoproj.io/hook': 'PreSync',
-        [if args.sync_wave != null then 'argocd.argoproj.io/sync-wave']: args.sync_wave,
+        [if sync_wave != null then 'argocd.argoproj.io/sync-wave']: sync_wave,
       },
     },
     spec+: {
@@ -29,7 +27,7 @@ local Operator(args) =
           serviceAccountName: 'redis-operator',
           restartPolicy: 'Always',
           containers_+: {
-            ui_container: kube.Container(names.operator) {
+            ui_container: kube.Container(name) {
               image: 'powerhome/redis-operator:v4.3.0',
               env_+: {
                 WATCH_NAMESPACE: {
@@ -58,7 +56,7 @@ local Operator(args) =
   };
 
 local CustomResource(args) =
-  local name = if args.name != null then args.name else defaults.redis.name;
+  local name = std.get(args, 'name', defaults.operator.name);
   {
     apiVersion: 'databases.spotahome.com/v1',
     kind: 'RedisFailover',
