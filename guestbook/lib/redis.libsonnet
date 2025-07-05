@@ -57,6 +57,7 @@ local Operator(args) =
 
 local CustomResource(args) =
   local name = std.get(args, 'name', defaults.operator.name);
+  local namespace = std.get(args, 'namespace');
   {
     apiVersion: 'databases.spotahome.com/v1',
     kind: 'RedisFailover',
@@ -74,7 +75,7 @@ local CustomResource(args) =
       networkPolicyNsList: [
         {
           matchLabelKey: 'app.kubernetes.io/name',
-          matchLabelValue: 'guestbook-libsonnet',
+          matchLabelValue: namespace,
         },
       ],
       redis: {

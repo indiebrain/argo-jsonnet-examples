@@ -13,7 +13,7 @@ local names = {
 
 local stack = {
   redis_operator: redis.Operator({ sync_wave: waves.accessories }),
-  redis_cache: redis.CustomResource({ name: 'cache', sync_wave: waves.accessories }),
+  redis_cache: redis.CustomResource({ name: 'cache', namespace: std.extVar('namespace'), sync_wave: waves.accessories }),
   ui_deployment: kube.Deployment(names.ui) {
     metadata+: {
       annotations+: {
@@ -41,6 +41,5 @@ local stack = {
 };
 
 kube.List() {
-  items_+:
-    stack,
+  items_+: stack,
 }
