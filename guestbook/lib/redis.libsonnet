@@ -1,4 +1,4 @@
-local kube = import 'vendor/kube-libsonnet/kube.libsonnet';
+local kube = import '../vendor/kube-libsonnet/kube.libsonnet';
 
 local names = {
   operator: 'redis-operator',

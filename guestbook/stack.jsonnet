@@ -1,4 +1,4 @@
-local redis = import 'redis.libsonnet';
+local redis = import 'lib/redis.libsonnet';
 local kube = import 'vendor/kube-libsonnet/kube.libsonnet';
 
 local waves = {
